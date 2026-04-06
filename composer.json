@@ -23,8 +23,8 @@
     }
   ],
   "require": {
-    "sunnysideup/ecommerce": "*",
-    "sunnysideup/download": "dev-main",
+    "sunnysideup/ecommerce": "5.x-dev",
+    "sunnysideup/download": "5.x-dev",
     "tractorcow/silverstripe-autocomplete": "^5.0",
     "silverstripe/recipe-cms": "^5.0",
     "real-digital/gtin-validator": "^1.3"
