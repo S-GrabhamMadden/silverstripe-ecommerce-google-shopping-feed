@@ -36,12 +36,14 @@ class ProductCollectionForGoogleShoppingFeed extends ProductCollection
             } else {
                 $productArray = $this->oneProductRaw2Array($productRaw);
             }
+
             // ensure special chars are converted to HTML entities for XML output
             // do other stuff!
             if (! empty($productArray)) {
                 $array[] = $productArray;
             }
         }
+
         return $array;
     }
 
@@ -67,6 +69,7 @@ class ProductCollectionForGoogleShoppingFeed extends ProductCollection
         foreach ($productArray as $key => $value) {
             $productArray[$key] = ($value);
         }
+
         return $productArray;
     }
 
@@ -78,7 +81,7 @@ class ProductCollectionForGoogleShoppingFeed extends ProductCollection
             self::$currency = strtoupper(EcommerceCurrency::default_currency_code());
         }
 
-        return number_format($price, 2, '.', '') . ' ' . strtoupper(self::$currency);
+        return number_format($price, 2, '.', '') . ' ' . strtoupper((string) self::$currency);
     }
 
     public function getSQL(?string $where = ''): string
@@ -138,6 +141,7 @@ class ProductCollectionForGoogleShoppingFeed extends ProductCollection
         if (! is_array($where)) {
             $where = [$where];
         }
+
         $where = array_filter($where);
         return array_unique($where);
     }
@@ -157,9 +161,10 @@ class ProductCollectionForGoogleShoppingFeed extends ProductCollection
         if ($s === '' || $s === '0') {
             return '';
         }
+
         $s = strip_tags($s);
         $s = DBField::create_field('Varchar', $s)->LimitCharactersToClosestWord(300, true);
-        $s = preg_replace('/[^a-zA-Z0-9\s]/', ' ', $s);
+        $s = preg_replace('/[^a-zA-Z0-9\s]/', ' ', (string) $s);
         $s = preg_replace('/\s+/', ' ', $s);
         return trim($s);
     }
